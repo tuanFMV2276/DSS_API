@@ -9,6 +9,9 @@ class Main_Diamond extends Model
 {
     use HasFactory;
 
+    protected $table        = 'Main_Diamond';
+    protected $primaryKey   = 'id';
+
     protected $fillable = 
     ['diamond_name', 'origin', 'cara_weight', 
     'clarity','color', 'describe', 

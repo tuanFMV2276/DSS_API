@@ -18,7 +18,7 @@ class Product extends Model
      * @var array
      */
     protected $fillable = ['product_code', 'product_name', 'image', 'main_diamond_id',
-     'extra_diamond_id', 'number_ex_diamond', 'number', 'diamond_shell_id','size', 
+     'extra_diamond_id', 'number_ex_diamond', 'quantity', 'diamond_shell_id','size', 
      'price_rate', 'status'];
     /**
      * The attributes that should be hidden for arrays.
@@ -32,10 +32,27 @@ class Product extends Model
         return $this->belongsTo(Ex_Diamond::class, 'extra_diamond_id');
     }
 
+    public function Diamond_Shell()
+    {
+        return $this->belongsTo(Diamond_Shell::class, 'diamond_shell_id');
+    }
+
     public function Main_Diamond()
     {
         return $this->belongsTo(Main_Diamond::class, 'main_diamond_id');
     }
+
+    public function Warranty_Certificate()
+    {
+        $this->hasOne(Warranty_Certificate::class, "product_id");
+    }
+
+    public function Order_Detail()
+    {
+        $this->hasOne(Order_Detail::class, "product_id");
+    }
+
+
     
 
 }
