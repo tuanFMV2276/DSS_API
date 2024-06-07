@@ -3,9 +3,8 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use Modules\Admin\Entities\Product as EntitiesProduct;
 
-class Product extends Controller
+class BaseController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -14,7 +13,7 @@ class Product extends Controller
      */
     public function index()
     {
-        return EntitiesProduct::all();
+        //
     }
 
     /**
@@ -25,8 +24,7 @@ class Product extends Controller
      */
     public function store(Request $request)
     {
-        $product = EntitiesProduct::create($request->all());
-        return response()->json($product, 201);
+        //
     }
 
     /**
@@ -37,7 +35,7 @@ class Product extends Controller
      */
     public function show($id)
     {
-        return EntitiesProduct::findOrFail($id);
+        //
     }
 
     /**
@@ -49,9 +47,7 @@ class Product extends Controller
      */
     public function update(Request $request, $id)
     {
-        $product = EntitiesProduct::findOrFail($id);
-        $product->update($request->all());
-        return response()->json($product, 200);
+        //
     }
 
     /**
@@ -62,7 +58,6 @@ class Product extends Controller
      */
     public function destroy($id)
     {
-        EntitiesProduct::destroy($id);
-        return response()->json(null, 204);
+        //
     }
 }

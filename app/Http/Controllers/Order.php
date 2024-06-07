@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use Modules\Admin\Entities\Order as EntitiesOrder;
 
 class Order extends Controller
 {
@@ -13,17 +14,7 @@ class Order extends Controller
      */
     public function index()
     {
-        //
-    }
-
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function create()
-    {
-        //
+        return EntitiesOrder::all();
     }
 
     /**
@@ -34,7 +25,8 @@ class Order extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $order = EntitiesOrder::create($request->all());
+        return response()->json($order, 201);
     }
 
     /**
@@ -45,18 +37,7 @@ class Order extends Controller
      */
     public function show($id)
     {
-        //
-    }
-
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function edit($id)
-    {
-        //
+        return EntitiesOrder::findOrFail($id);
     }
 
     /**
@@ -68,7 +49,9 @@ class Order extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        $order = EntitiesOrder::findOrFail($id);
+        $order->update($request->all());
+        return response()->json($order, 200);
     }
 
     /**
@@ -79,6 +62,7 @@ class Order extends Controller
      */
     public function destroy($id)
     {
-        //
+        EntitiesOrder::destroy($id);
+        return response()->json(null, 204);
     }
 }

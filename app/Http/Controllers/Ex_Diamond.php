@@ -3,27 +3,18 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use Modules\Admin\Entities\Ex_Diamond as EntitiesEx_Diamond;
 
 class Ex_Diamond extends Controller
 {
-    /**
+        /**
      * Display a listing of the resource.
      *
      * @return \Illuminate\Http\Response
      */
     public function index()
     {
-        //
-    }
-
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function create()
-    {
-        //
+        return EntitiesEx_Diamond::all();
     }
 
     /**
@@ -34,7 +25,8 @@ class Ex_Diamond extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $exd = EntitiesEx_Diamond::create($request->all());
+        return response()->json($exd, 201);
     }
 
     /**
@@ -45,18 +37,7 @@ class Ex_Diamond extends Controller
      */
     public function show($id)
     {
-        //
-    }
-
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function edit($id)
-    {
-        //
+        return EntitiesEx_Diamond::findOrFail($id);
     }
 
     /**
@@ -68,7 +49,9 @@ class Ex_Diamond extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        $exd = EntitiesEx_Diamond::findOrFail($id);
+        $exd->update($request->all());
+        return response()->json($exd, 200);
     }
 
     /**
@@ -79,6 +62,7 @@ class Ex_Diamond extends Controller
      */
     public function destroy($id)
     {
-        //
+        EntitiesEx_Diamond::destroy($id);
+        return response()->json(null, 204);
     }
 }

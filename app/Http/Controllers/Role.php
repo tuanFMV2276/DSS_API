@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use Modules\Admin\Entities\Role as EntitiesRole;
 
 class Role extends Controller
 {
@@ -13,17 +14,7 @@ class Role extends Controller
      */
     public function index()
     {
-        //
-    }
-
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function create()
-    {
-        //
+        return EntitiesRole::all();
     }
 
     /**
@@ -34,7 +25,8 @@ class Role extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $role = EntitiesRole::create($request->all());
+        return response()->json($role, 201);
     }
 
     /**
@@ -45,18 +37,7 @@ class Role extends Controller
      */
     public function show($id)
     {
-        //
-    }
-
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function edit($id)
-    {
-        //
+        return EntitiesRole::findOrFail($id);
     }
 
     /**
@@ -68,7 +49,9 @@ class Role extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        $role = EntitiesRole::findOrFail($id);
+        $role->update($request->all());
+        return response()->json($role, 200);
     }
 
     /**
@@ -79,6 +62,7 @@ class Role extends Controller
      */
     public function destroy($id)
     {
-        //
+        EntitiesRole::destroy($id);
+        return response()->json(null, 204);
     }
 }

@@ -10,7 +10,7 @@ class Ex_Diamond extends Model
     use HasFactory;
 
 
-    protected $table        = 'Ex_Diamond';
+    protected $table        = 'Extra_Diamond';
     protected $primaryKey   = 'id';
     /**
      * The attributes that are mass assignable.

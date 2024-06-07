@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use Modules\Admin\Entities\Diamond_Price_List as EntitiesDiamond_Price_List;
 
 class Diamond_Price_List extends Controller
 {
@@ -13,17 +14,7 @@ class Diamond_Price_List extends Controller
      */
     public function index()
     {
-        //
-    }
-
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function create()
-    {
-        //
+        return EntitiesDiamond_Price_List::all();
     }
 
     /**
@@ -34,7 +25,8 @@ class Diamond_Price_List extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $diamondPriceList = EntitiesDiamond_Price_List::create($request->all());
+        return response()->json($diamondPriceList, 201);
     }
 
     /**
@@ -45,18 +37,7 @@ class Diamond_Price_List extends Controller
      */
     public function show($id)
     {
-        //
-    }
-
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function edit($id)
-    {
-        //
+        return EntitiesDiamond_Price_List::findOrFail($id);
     }
 
     /**
@@ -68,7 +49,9 @@ class Diamond_Price_List extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        $diamondPriceList = EntitiesDiamond_Price_List::findOrFail($id);
+        $diamondPriceList->update($request->all());
+        return response()->json($diamondPriceList, 200);
     }
 
     /**
@@ -79,6 +62,7 @@ class Diamond_Price_List extends Controller
      */
     public function destroy($id)
     {
-        //
+        EntitiesDiamond_Price_List::destroy($id);
+        return response()->json(null, 204);
     }
 }

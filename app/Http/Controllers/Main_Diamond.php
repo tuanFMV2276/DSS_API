@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use Modules\Admin\Entities\Main_Diamond as EntitiesMain_Diamond;
 
 class Main_Diamond extends Controller
 {
@@ -13,17 +14,7 @@ class Main_Diamond extends Controller
      */
     public function index()
     {
-        //
-    }
-
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function create()
-    {
-        //
+        return EntitiesMain_Diamond::all();
     }
 
     /**
@@ -34,7 +25,8 @@ class Main_Diamond extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $mainDiamond = EntitiesMain_Diamond::create($request->all());
+        return response()->json($mainDiamond, 201);
     }
 
     /**
@@ -45,18 +37,7 @@ class Main_Diamond extends Controller
      */
     public function show($id)
     {
-        //
-    }
-
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function edit($id)
-    {
-        //
+        return EntitiesMain_Diamond::findOrFail($id);
     }
 
     /**
@@ -68,7 +49,9 @@ class Main_Diamond extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        $mainDiamond = EntitiesMain_Diamond::findOrFail($id);
+        $mainDiamond->update($request->all());
+        return response()->json($mainDiamond, 200);
     }
 
     /**
@@ -79,6 +62,7 @@ class Main_Diamond extends Controller
      */
     public function destroy($id)
     {
-        //
+        EntitiesMain_Diamond::destroy($id);
+        return response()->json(null, 204);
     }
 }

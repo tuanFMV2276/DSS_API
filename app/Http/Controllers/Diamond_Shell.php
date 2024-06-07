@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use Modules\Admin\Entities\Diamond_Shell as EntitiesDiamond_Shell;
 
 class Diamond_Shell extends Controller
 {
@@ -13,17 +14,7 @@ class Diamond_Shell extends Controller
      */
     public function index()
     {
-        //
-    }
-
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function create()
-    {
-        //
+        return EntitiesDiamond_Shell::all();
     }
 
     /**
@@ -34,7 +25,8 @@ class Diamond_Shell extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $diamond_Shell = EntitiesDiamond_Shell::create($request->all());
+        return response()->json($diamond_Shell, 201);
     }
 
     /**
@@ -45,18 +37,7 @@ class Diamond_Shell extends Controller
      */
     public function show($id)
     {
-        //
-    }
-
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function edit($id)
-    {
-        //
+        return EntitiesDiamond_Shell::findOrFail($id);
     }
 
     /**
@@ -68,7 +49,9 @@ class Diamond_Shell extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        $diamond_Shell = EntitiesDiamond_Shell::findOrFail($id);
+        $diamond_Shell->update($request->all());
+        return response()->json($diamond_Shell, 200);
     }
 
     /**
@@ -79,6 +62,8 @@ class Diamond_Shell extends Controller
      */
     public function destroy($id)
     {
-        //
+        EntitiesDiamond_Shell::destroy($id);
+        return response()->json(null, 204);
     }
 }
+

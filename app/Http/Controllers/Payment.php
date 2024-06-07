@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use Modules\Admin\Entities\Payment as EntitiesPayment;
 
 class Payment extends Controller
 {
@@ -13,17 +14,7 @@ class Payment extends Controller
      */
     public function index()
     {
-        //
-    }
-
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function create()
-    {
-        //
+        return EntitiesPayment::all();
     }
 
     /**
@@ -34,7 +25,8 @@ class Payment extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $payment = EntitiesPayment::create($request->all());
+        return response()->json($payment, 201);
     }
 
     /**
@@ -45,18 +37,7 @@ class Payment extends Controller
      */
     public function show($id)
     {
-        //
-    }
-
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function edit($id)
-    {
-        //
+        return EntitiesPayment::findOrFail($id);
     }
 
     /**
@@ -68,7 +49,9 @@ class Payment extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        $payment = EntitiesPayment::findOrFail($id);
+        $payment->update($request->all());
+        return response()->json($payment, 200);
     }
 
     /**
@@ -79,6 +62,7 @@ class Payment extends Controller
      */
     public function destroy($id)
     {
-        //
+        EntitiesPayment::destroy($id);
+        return response()->json(null, 204);
     }
 }

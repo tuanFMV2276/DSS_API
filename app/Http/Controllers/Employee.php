@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use Modules\Admin\Entities\Employee as EntitiesEmployee;
 
 class Employee extends Controller
 {
@@ -13,17 +14,7 @@ class Employee extends Controller
      */
     public function index()
     {
-        //
-    }
-
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function create()
-    {
-        //
+        return EntitiesEmployee::all();
     }
 
     /**
@@ -34,7 +25,8 @@ class Employee extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $employee = EntitiesEmployee::create($request->all());
+        return response()->json($employee, 201);
     }
 
     /**
@@ -45,18 +37,7 @@ class Employee extends Controller
      */
     public function show($id)
     {
-        //
-    }
-
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function edit($id)
-    {
-        //
+        return EntitiesEmployee::findOrFail($id);
     }
 
     /**
@@ -68,7 +49,9 @@ class Employee extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        $employee = EntitiesEmployee::findOrFail($id);
+        $employee->update($request->all());
+        return response()->json($employee, 200);
     }
 
     /**
@@ -79,6 +62,7 @@ class Employee extends Controller
      */
     public function destroy($id)
     {
-        //
+        EntitiesEmployee::destroy($id);
+        return response()->json(null, 204);
     }
 }

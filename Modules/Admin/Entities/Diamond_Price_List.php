@@ -9,7 +9,7 @@ class Diamond_Price_List extends Model
 {
     use HasFactory;
 
-    protected $table        = 'Diamond_Price_List';
+    protected $table        = 'DiamondPriceList';
     protected $primaryKey   = 'id';
 
     protected $fillable = ['price', 'clarity', 'origin', 'cut', 'cara_weight'];

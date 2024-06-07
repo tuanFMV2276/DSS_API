@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use Modules\Admin\Entities\Reward_Point as EntitiesReward_Point;
 
 class Reward_Point extends Controller
 {
@@ -13,17 +14,7 @@ class Reward_Point extends Controller
      */
     public function index()
     {
-        //
-    }
-
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function create()
-    {
-        //
+        return EntitiesReward_Point::all();
     }
 
     /**
@@ -34,7 +25,8 @@ class Reward_Point extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $rp = EntitiesReward_Point::create($request->all());
+        return response()->json($rp, 201);
     }
 
     /**
@@ -45,18 +37,7 @@ class Reward_Point extends Controller
      */
     public function show($id)
     {
-        //
-    }
-
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function edit($id)
-    {
-        //
+        return EntitiesReward_Point::findOrFail($id);
     }
 
     /**
@@ -68,7 +49,9 @@ class Reward_Point extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        $rp = EntitiesReward_Point::findOrFail($id);
+        $rp->update($request->all());
+        return response()->json($rp, 200);
     }
 
     /**
@@ -79,6 +62,7 @@ class Reward_Point extends Controller
      */
     public function destroy($id)
     {
-        //
+        EntitiesReward_Point::destroy($id);
+        return response()->json(null, 204);
     }
 }

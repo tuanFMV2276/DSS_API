@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use Modules\Admin\Entities\Warranty_Certificate as EntitiesWarranty_Certificate;
 
 class Warranty_Certificate extends Controller
 {
@@ -13,17 +14,7 @@ class Warranty_Certificate extends Controller
      */
     public function index()
     {
-        //
-    }
-
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function create()
-    {
-        //
+        return EntitiesWarranty_Certificate::all();
     }
 
     /**
@@ -34,7 +25,8 @@ class Warranty_Certificate extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $wc = EntitiesWarranty_Certificate::create($request->all());
+        return response()->json($wc, 201);
     }
 
     /**
@@ -45,18 +37,7 @@ class Warranty_Certificate extends Controller
      */
     public function show($id)
     {
-        //
-    }
-
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function edit($id)
-    {
-        //
+        return EntitiesWarranty_Certificate::findOrFail($id);
     }
 
     /**
@@ -68,7 +49,9 @@ class Warranty_Certificate extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        $wc = EntitiesWarranty_Certificate::findOrFail($id);
+        $wc->update($request->all());
+        return response()->json($wc, 200);
     }
 
     /**
@@ -79,6 +62,7 @@ class Warranty_Certificate extends Controller
      */
     public function destroy($id)
     {
-        //
+        EntitiesWarranty_Certificate::destroy($id);
+        return response()->json(null, 204);
     }
 }
