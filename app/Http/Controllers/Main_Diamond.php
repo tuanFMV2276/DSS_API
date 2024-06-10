@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 use Modules\Admin\Entities\Main_Diamond as EntitiesMain_Diamond;
 
 class Main_Diamond extends Controller
@@ -14,7 +15,14 @@ class Main_Diamond extends Controller
      */
     public function index()
     {
-        return EntitiesMain_Diamond::all();
+        $diamonds = EntitiesMain_Diamond::join('DiamondPriceList', function ($join) {
+            $join->on('Main_Diamond.origin', '=', 'DiamondPriceList.origin')
+                  ->on('Main_Diamond.clarity', '=', 'DiamondPriceList.clarity')
+                //  ->on('Main_Diamond.cut', '=', 'DiamondPriceList.cut')
+                  ->on('Main_Diamond.cara_weight', '=', 'DiamondPriceList.cara_weight');
+        })->select('Main_Diamond.*', 'DiamondPriceList.price')
+          ->get();
+        return response()->json($diamonds);
     }
 
     /**

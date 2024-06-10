@@ -31,7 +31,7 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
     return $request->user();
 });
 
-Route::apiResource('diamondpicelist', Diamond_Price_List::class);
+Route::apiResource('diamondpricelist', Diamond_Price_List::class);
 
 Route::apiResource('customer', Customer::class);
 

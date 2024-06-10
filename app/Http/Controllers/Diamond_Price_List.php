@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 use Modules\Admin\Entities\Diamond_Price_List as EntitiesDiamond_Price_List;
 
 class Diamond_Price_List extends Controller
