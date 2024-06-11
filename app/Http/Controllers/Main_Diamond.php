@@ -18,8 +18,9 @@ class Main_Diamond extends Controller
         $diamonds = EntitiesMain_Diamond::join('DiamondPriceList', function ($join) {
             $join->on('Main_Diamond.origin', '=', 'DiamondPriceList.origin')
                   ->on('Main_Diamond.clarity', '=', 'DiamondPriceList.clarity')
-                //  ->on('Main_Diamond.cut', '=', 'DiamondPriceList.cut')
-                  ->on('Main_Diamond.cara_weight', '=', 'DiamondPriceList.cara_weight');
+                  ->on('Main_Diamond.cut', '=', 'DiamondPriceList.cut')
+                  ->on('Main_Diamond.cara_weight', '=', 'DiamondPriceList.cara_weight')
+                  ->on('Main_Diamond.color', '=', 'DiamondPriceList.color');
         })->select('Main_Diamond.*', 'DiamondPriceList.price')
           ->get();
         return response()->json($diamonds);
