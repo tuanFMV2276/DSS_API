@@ -23,6 +23,13 @@ class Main_Diamond extends Controller
                   ->on('Main_Diamond.color', '=', 'DiamondPriceList.color');
         })->select('Main_Diamond.*', 'DiamondPriceList.price')
           ->get();
+
+          // Format the price
+        $diamonds = $diamonds->map(function ($diamond) {
+            $diamond->price = number_format($diamond->price, 0, ',', '.');
+            return $diamond;
+        });
+
         return response()->json($diamonds);
     }
 
