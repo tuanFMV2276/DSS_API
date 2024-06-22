@@ -8,7 +8,8 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 class Main_Diamond extends Model
 {
     use HasFactory;
-
+    //thêm dòng timestamp disable
+    public $timestamps = false;
     protected $table        = 'Main_Diamond';
     protected $primaryKey   = 'id';
 

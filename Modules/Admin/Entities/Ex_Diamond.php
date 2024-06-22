@@ -9,7 +9,8 @@ class Ex_Diamond extends Model
 {
     use HasFactory;
 
-
+    //thêm dòng timestamp disable
+    public $timestamps = false;
     protected $table        = 'Extra_Diamond';
     protected $primaryKey   = 'id';
     /**

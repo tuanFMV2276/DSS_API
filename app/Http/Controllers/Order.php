@@ -65,4 +65,7 @@ class Order extends Controller
         EntitiesOrder::destroy($id);
         return response()->json(null, 204);
     }
+    public function statusDisplay($status){
+        return EntitiesOrder::where('status', $status)->get();
+    }
 }

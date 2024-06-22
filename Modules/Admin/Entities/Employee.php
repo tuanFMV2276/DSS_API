@@ -11,14 +11,16 @@ class Employee extends Model
 
     protected $table        = 'Employee';
     protected $primaryKey   = 'id';
+    //thêm dòng timestamp disable
+    public $timestamps = false;
 
     protected $fillable = ['user_name', 'email', 'password', 
-    'role_id,', 'phone', 'address', 
+    'role_id', 'phone', 'address', 
     'date_of_birth', 'gender', 'status'];
     
-    public function Role()
-    {
-        return $this->belongsTo(Role::class, "role_id");
-    }
+     public function Role()
+     {
+         return $this->belongsTo(Role::class, "role_id");
+     }
 
 }

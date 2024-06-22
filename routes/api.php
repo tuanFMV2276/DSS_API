@@ -56,3 +56,4 @@ Route::apiResource('rewardpoint', Reward_Point::class);
 Route::apiResource('role', Role::class);
 
 Route::apiResource('warrantycertificate', Warranty_Certificate::class);
+

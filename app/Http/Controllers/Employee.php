@@ -37,7 +37,8 @@ class Employee extends Controller
      */
     public function show($id)
     {
-        return EntitiesEmployee::findOrFail($id);
+        $employee = EntitiesEmployee::findOrFail($id);
+        return $employee;
     }
 
     /**
@@ -49,6 +50,7 @@ class Employee extends Controller
      */
     public function update(Request $request, $id)
     {
+        
         $employee = EntitiesEmployee::findOrFail($id);
         $employee->update($request->all());
         return response()->json($employee, 200);
@@ -62,7 +64,8 @@ class Employee extends Controller
      */
     public function destroy($id)
     {
-        EntitiesEmployee::destroy($id);
+        $employee = EntitiesEmployee::findOrFail($id);
+        $employee->delete();
         return response()->json(null, 204);
     }
 }

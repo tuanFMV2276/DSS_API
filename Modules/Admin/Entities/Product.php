@@ -9,7 +9,8 @@ class Product extends Model
 {
     use HasFactory;
 
-
+    //thêm dòng timestamp disable
+    public $timestamps = false;
     protected $table        = 'Product';
     protected $primaryKey   = 'id';
     /**
@@ -18,7 +19,7 @@ class Product extends Model
      * @var array
      */
     protected $fillable = ['product_code', 'product_name', 'image', 'main_diamond_id',
-     'extra_diamond_id', 'number_ex_diamond', 'quantity', 'diamond_shell_id','size', 
+     'extra_diamond_id', 'number_ex_diamond', 'quantity','number','diamond_shell_id','size', 
      'price_rate', 'status'];
     /**
      * The attributes that should be hidden for arrays.
