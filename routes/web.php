@@ -1,6 +1,7 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\Product;
 
 /*
 |--------------------------------------------------------------------------
@@ -20,6 +21,8 @@ Route::get('/', function () {
 Route::get('/Homepage', function () {
     return view('welcome');
 });
+
+Route::get('api/product/update/{product_code}', [Product::class, 'getProductByCode']);
 
 
 Auth::routes();
