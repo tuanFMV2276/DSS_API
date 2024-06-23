@@ -17,7 +17,7 @@ class Customer extends Model
     
     public function Reward_Point()
     {
-        return $this->hasOne(Reward_Point::class, 'customer_id');
+        return $this->hasMany(Discount_sale::class, 'customer_id');
     }
 
     public function Order()
