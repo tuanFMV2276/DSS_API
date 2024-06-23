@@ -29,6 +29,26 @@ class Order extends Controller
         return response()->json($order, 201);
     }
 
+    // public function store(Request $request)
+    // {
+    //     // Validate dữ liệu nếu cần thiết
+    //     $validatedData = $request->validate([
+    //         'order_date' => 'nullable|date',
+    //         'total_price' => 'required|numeric',
+    //         'name' => 'required|string',
+    //         'email' => 'required|email',
+    //         'address' => 'required|string',
+    //         'phone' => 'required|string',
+    //         'status' => 'integer',
+    //     ]);
+
+    //     // Lưu dữ liệu vào database, ví dụ sử dụng Eloquent
+    //     $order = EntitiesOrder::create($validatedData);
+
+    //     // Trả về response json thành công
+    //     return response()->json($order, 201);
+    // }
+
     /**
      * Display the specified resource.
      *

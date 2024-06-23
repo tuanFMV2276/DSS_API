@@ -3,9 +3,9 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use Modules\Admin\Entities\Reward_Point as EntitiesReward_Point;
+use Modules\Admin\Entities\Discount_sale;
 
-class Reward_Point extends Controller
+class DiscountSale extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -14,7 +14,7 @@ class Reward_Point extends Controller
      */
     public function index()
     {
-        return EntitiesReward_Point::all();
+        return Discount_sale::all();
     }
 
     /**
@@ -25,8 +25,8 @@ class Reward_Point extends Controller
      */
     public function store(Request $request)
     {
-        $rp = EntitiesReward_Point::create($request->all());
-        return response()->json($rp, 201);
+        $payment = Discount_sale::create($request->all());
+        return response()->json($payment, 201);
     }
 
     /**
@@ -37,7 +37,7 @@ class Reward_Point extends Controller
      */
     public function show($id)
     {
-        return EntitiesReward_Point::findOrFail($id);
+        return Discount_sale::findOrFail($id);
     }
 
     /**
@@ -49,9 +49,9 @@ class Reward_Point extends Controller
      */
     public function update(Request $request, $id)
     {
-        $rp = EntitiesReward_Point::findOrFail($id);
-        $rp->update($request->all());
-        return response()->json($rp, 200);
+        $payment = Discount_sale::findOrFail($id);
+        $payment->update($request->all());
+        return response()->json($payment, 200);
     }
 
     /**
@@ -62,7 +62,7 @@ class Reward_Point extends Controller
      */
     public function destroy($id)
     {
-        EntitiesReward_Point::destroy($id);
+        Discount_sale::destroy($id);
         return response()->json(null, 204);
     }
 }
