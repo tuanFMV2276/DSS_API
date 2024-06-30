@@ -15,7 +15,12 @@ class Product extends Controller
      */
     public function index()
     {
-        return EntitiesProduct::all();
+        //return EntitiesProduct::all();
+        $products = EntitiesProduct::join('Main_Diamond', function ($join) {
+            $join->on('Main_Diamond.id', '=', 'Product.id') ;
+        })->select('Main_Diamond.*', 'Product.*')
+        ->get();
+        return response()->json($products);
     }
 
     /**
