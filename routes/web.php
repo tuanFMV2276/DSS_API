@@ -1,7 +1,8 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
-use App\Http\Controllers\Employee;
+use App\Http\Controllers\Product;
+use App\Http\Controllers\Order;
 
 /*
 |--------------------------------------------------------------------------
@@ -22,8 +23,10 @@ Route::get('/Homepage', function () {
     return view('welcome');
 });
 
+Route::get('api/product/update/{product_code}', [Product::class, 'getProductByCode']);
+
+Route::get('api/order/search/{user_name}', [Order::class, 'searchOrderByName']);
 
 Auth::routes();
 
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
-Route::get('/order/status/{status}',[App\Http\Controllers\Order::class,'statusDisplay']);

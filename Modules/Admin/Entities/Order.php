@@ -11,9 +11,9 @@ class Order extends Model
 
     protected $table        = 'Order';
     protected $primaryKey   = 'id';
-    //thêm dòng timestamp disable
     public $timestamps = false;
-    protected $fillable = ['customer_id', 'order_date', 'total_price', 'status'];
+
+    protected $fillable = ['customer_id', 'order_date', 'total_price', 'name', 'email', 'address', 'phone', 'status'];
     
     public function Payment()
     {

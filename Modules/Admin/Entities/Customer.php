@@ -11,13 +11,14 @@ class Customer extends Model
 
     protected $table        = 'Customer';
     protected $primaryKey   = 'id';
+    public $timestamps = false;
 
     protected $fillable = ['name', 'email', 'password', 
      'phone', 'address', 'date_of_birth', 'gender', 'status'];
     
     public function Reward_Point()
     {
-        return $this->hasOne(Reward_Point::class, 'customer_id');
+        return $this->hasMany(Discount_sale::class, 'customer_id');
     }
 
     public function Order()

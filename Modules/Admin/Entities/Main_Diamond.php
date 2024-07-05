@@ -14,7 +14,7 @@ class Main_Diamond extends Model
     protected $primaryKey   = 'id';
 
     protected $fillable = 
-    ['diamond_name', 'origin', 'cara_weight', 
+    ['shape', 'origin', 'cara_weight', 
     'clarity','color', 'describe', 
     'quantity', 'cut', 'polish', 
     'symmetry', 'measurements',

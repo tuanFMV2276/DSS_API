@@ -162,6 +162,7 @@ return [
         Illuminate\Validation\ValidationServiceProvider::class,
         Illuminate\View\ViewServiceProvider::class,
         Nwidart\Modules\LaravelModulesServiceProvider::class,
+        Laravel\Telescope\TelescopeServiceProvider::class,
 
         /*
          * Package Service Providers...
@@ -176,8 +177,6 @@ return [
         App\Providers\EventServiceProvider::class,
         App\Providers\RouteServiceProvider::class,
         App\Providers\TelescopeServiceProvider::class,
-        
-        Laravel\Telescope\TelescopeServiceProvider::class,
 
     ],
 

@@ -11,6 +11,7 @@ class Warranty_Certificate extends Model
 
     protected $table        = 'Warranty_Certificate';
     protected $primaryKey   = 'id';
+    public $timestamps = false;
 
     protected $fillable = ['product_id', 'issue_date', 'expiry_date', 'status'] ;
     

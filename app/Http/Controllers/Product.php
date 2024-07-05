@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use Modules\Admin\Entities\Product as EntitiesProduct;
+use Illuminate\Database\Eloquent\Model;
 
 class Product extends Controller
 {
@@ -38,6 +39,23 @@ class Product extends Controller
     public function show($id)
     {
         return EntitiesProduct::findOrFail($id);
+    }
+
+    public function getProductByCode($product_code)
+    {
+        // Tìm sản phẩm với product_code trong cơ sở dữ liệu
+        $product = EntitiesProduct::where('product_code', $product_code)->first();
+
+        // Kiểm tra xem sản phẩm có tồn tại không
+        if ($product) {
+            return response()->json([
+                'id' => $product->id,
+            ]);
+        } else {
+            return response()->json([
+                'error' => 'Product not found.'
+            ], 404);
+        }
     }
 
     /**

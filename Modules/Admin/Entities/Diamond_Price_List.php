@@ -11,8 +11,9 @@ class Diamond_Price_List extends Model
 
     protected $table        = 'DiamondPriceList';
     protected $primaryKey   = 'id';
+    public $timestamps = false;
 
-    protected $fillable = ['price', 'clarity', 'origin', 'cut', 'cara_weight'];
+    protected $fillable = ['price', 'clarity', 'color','origin', 'cut', 'cara_weight'];
     
 
 }
