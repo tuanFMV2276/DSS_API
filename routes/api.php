@@ -59,12 +59,9 @@ Route::apiResource('role', Role::class);
 
 Route::apiResource('warrantycertificate', Warranty_Certificate::class);
 
-<<<<<<< HEAD
-=======
 //==========================Auth==============================================
 Route::post('login', [AuthController::class, 'login']);
 
 Route::post('register', [AuthController::class, 'register']);
 
 Route::post('logout', [AuthController::class, 'logout'])->middleware('auth:sanctum');
->>>>>>> 65fa1c1ba7b845533ab6b589e1bc300a49f1f385

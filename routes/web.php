@@ -2,10 +2,7 @@
 
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Product;
-<<<<<<< HEAD
 use App\Http\Controllers\Order;
-=======
->>>>>>> 65fa1c1ba7b845533ab6b589e1bc300a49f1f385
 
 /*
 |--------------------------------------------------------------------------
@@ -28,10 +25,7 @@ Route::get('/Homepage', function () {
 
 Route::get('api/product/update/{product_code}', [Product::class, 'getProductByCode']);
 
-<<<<<<< HEAD
 Route::get('api/order/search/{user_name}', [Order::class, 'searchOrderByName']);
-=======
->>>>>>> 65fa1c1ba7b845533ab6b589e1bc300a49f1f385
 
 Auth::routes();
 
