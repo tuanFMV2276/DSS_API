@@ -1,8 +1,10 @@
 <?php
 
+use App\Http\Controllers\API\AuthController;
 use App\Http\Controllers\Customer;
 use App\Http\Controllers\Diamond_Price_List;
 use App\Http\Controllers\Diamond_Shell;
+use App\Http\Controllers\DiscountSale;
 use App\Http\Controllers\Employee;
 use App\Http\Controllers\Ex_Diamond;
 use App\Http\Controllers\Main_Diamond;
@@ -51,9 +53,18 @@ Route::apiResource('payment', Payment::class);
 
 Route::apiResource('product', Product::class);
 
-Route::apiResource('rewardpoint', Reward_Point::class);
+Route::apiResource('rewardpoint', DiscountSale::class);
 
 Route::apiResource('role', Role::class);
 
 Route::apiResource('warrantycertificate', Warranty_Certificate::class);
 
+<<<<<<< HEAD
+=======
+//==========================Auth==============================================
+Route::post('login', [AuthController::class, 'login']);
+
+Route::post('register', [AuthController::class, 'register']);
+
+Route::post('logout', [AuthController::class, 'logout'])->middleware('auth:sanctum');
+>>>>>>> 65fa1c1ba7b845533ab6b589e1bc300a49f1f385
