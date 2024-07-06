@@ -11,7 +11,6 @@ use Illuminate\Support\Facades\Validator;
 
 class AuthController extends Controller
 {
-    // Đăng ký
     public function register(Request $request)
     {
         $validator = Validator::make($request->all(), [
@@ -20,7 +19,7 @@ class AuthController extends Controller
             'password' => 'required|string|min:8',
         ]);
 
-        if($validator->fails()){
+        if ($validator->fails()) {
             return response()->json($validator->errors(), 400);
         }
 
@@ -32,27 +31,27 @@ class AuthController extends Controller
 
         $token = $user->createToken('auth_token')->plainTextToken;
 
-        return response()->json(['data' => $user, 'access_token' => $token, 'token_type' => 'Bearer', ]);
+        return response()->json(['data' => $user, 'access_token' => $token, 'token_type' => 'Bearer']);
     }
 
-    // Đăng nhập
     public function login(Request $request)
     {
-        if (!Auth::attempt($request->only('email', 'password'))) {
+        $credentials = $request->only('email', 'password');
+
+        if (!Auth::attempt($credentials)) {
             return response()->json(['message' => 'Unauthorized'], 401);
         }
 
-        $user = User::where('email', $request['email'])->firstOrFail();
+        $user = Auth::user();
         $token = $user->createToken('auth_token')->plainTextToken;
 
-        return response()->json(['message' => 'Hi '.$user->name.', welcome to home','access_token' => $token, 'token_type' => 'Bearer', ]);
+        return response()->json(['data' => $user, 'access_token' => $token, 'token_type' => 'Bearer']);
     }
 
-    // Đăng xuất
     public function logout(Request $request)
     {
         $request->user()->tokens()->delete();
 
-        return response()->json(['message' => 'You have successfully logged out and the token was successfully deleted']);
+        return response()->json(['message' => 'Successfully logged out']);
     }
 }
