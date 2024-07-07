@@ -11,6 +11,7 @@ class Diamond_Shell extends Model
 
     protected $table        = 'Diamond_Shell';
     protected $primaryKey   = 'id';
+    public $timestamps = false;
 
     protected $fillable = ['weight', 'price', 'status'];
     
