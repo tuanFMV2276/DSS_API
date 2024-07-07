@@ -60,8 +60,41 @@ Route::apiResource('role', Role::class);
 Route::apiResource('warrantycertificate', Warranty_Certificate::class);
 
 //==========================Auth==============================================
-Route::post('login', [AuthController::class, 'login']);
 
 Route::post('register', [AuthController::class, 'register']);
+Route::post('login', [AuthController::class, 'login']);
+Route::middleware('auth:sanctum')->post('logout', [AuthController::class, 'logout']);
 
-Route::post('logout', [AuthController::class, 'logout'])->middleware('auth:sanctum');
+
+// Route::middleware('auth:sanctum')->group(function () {
+//     Route::post('/logout', [AuthController::class, 'logout']);
+//     // Thêm các route API khác cần bảo vệ vào đây
+
+//     Route::apiResource('diamondpricelist', Diamond_Price_List::class);
+
+//     Route::apiResource('customer', Customer::class);
+
+//     Route::apiResource('diamondshell', Diamond_Shell::class);
+
+//     Route::apiResource('employee', Employee::class);
+
+//     Route::apiResource('exdiamond', Ex_Diamond::class);
+
+//     Route::apiResource('maindiamond', Main_Diamond::class);
+
+//     Route::apiResource('orderdetail', Order_Detail::class);
+
+//     Route::apiResource('order', Order::class);
+
+//     Route::apiResource('payment', Payment::class);
+
+//     Route::apiResource('product', Product::class);
+
+//     Route::apiResource('rewardpoint', DiscountSale::class);
+
+//     Route::apiResource('role', Role::class);
+
+// Route::apiResource('warrantycertificate', Warranty_Certificate::class);
+// });
+
+// Route::post('logout', [AuthController::class, 'logout'])->middleware('auth:sanctum');
