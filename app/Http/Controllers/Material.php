@@ -3,9 +3,9 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use Modules\Admin\Entities\Diamond_Shell as EntitiesDiamond_Shell;
+use Modules\Admin\Entities\Material as EntitiesMaterial;
 
-class Diamond_Shell extends Controller
+class Material extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -14,12 +14,7 @@ class Diamond_Shell extends Controller
      */
     public function index()
     {
-        // return EntitiesDiamond_Shell::all();
-        $shell = EntitiesDiamond_Shell::join('Material', function ($join) {
-            $join->on('Material.id', '=', 'Diamond_Shell.material_id');
-        })->select('Diamond_Shell.*', 'Material.*')
-        ->get();
-        return response()->json($shell);
+        return EntitiesMaterial::all();
     }
 
     /**
@@ -30,8 +25,8 @@ class Diamond_Shell extends Controller
      */
     public function store(Request $request)
     {
-        $diamond_Shell = EntitiesDiamond_Shell::create($request->all());
-        return response()->json($diamond_Shell, 201);
+        $material = EntitiesMaterial::create($request->all());
+        return response()->json($material, 201);
     }
 
     /**
@@ -42,7 +37,7 @@ class Diamond_Shell extends Controller
      */
     public function show($id)
     {
-        return EntitiesDiamond_Shell::findOrFail($id);
+        return EntitiesMaterial::findOrFail($id);
     }
 
     /**
@@ -54,9 +49,9 @@ class Diamond_Shell extends Controller
      */
     public function update(Request $request, $id)
     {
-        $diamond_Shell = EntitiesDiamond_Shell::findOrFail($id);
-        $diamond_Shell->update($request->all());
-        return response()->json($diamond_Shell, 200);
+        $material = EntitiesMaterial::findOrFail($id);
+        $material->update($request->all());
+        return response()->json($material, 200);
     }
 
     /**
@@ -67,8 +62,7 @@ class Diamond_Shell extends Controller
      */
     public function destroy($id)
     {
-        EntitiesDiamond_Shell::destroy($id);
+        EntitiesMaterial::destroy($id);
         return response()->json(null, 204);
     }
 }
-

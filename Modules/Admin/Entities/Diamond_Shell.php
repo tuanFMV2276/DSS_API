@@ -12,7 +12,20 @@ class Diamond_Shell extends Model
     protected $table        = 'Diamond_Shell';
     protected $primaryKey   = 'id';
 
-    protected $fillable = ['weight', 'price', 'status'];
+    protected $fillable = ['name','weight', 'material_id', 'status'];
+
+    protected $appends = ['price'];
+
+    public function getPriceAttribute()
+    {
+        $material = Material::find($this->material_id);
+
+        $materialPrice = $material ? $material->price : 0;
+
+        $totalPrice = $materialPrice * $this->weight;
+
+        return $totalPrice;
+    }
     
     public function Product()
     {

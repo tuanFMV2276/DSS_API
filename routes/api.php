@@ -8,6 +8,7 @@ use App\Http\Controllers\DiscountSale;
 use App\Http\Controllers\Employee;
 use App\Http\Controllers\Ex_Diamond;
 use App\Http\Controllers\Main_Diamond;
+use App\Http\Controllers\Material;
 use App\Http\Controllers\Order;
 use App\Http\Controllers\Order_Detail;
 use App\Http\Controllers\Payment;
@@ -56,6 +57,8 @@ Route::apiResource('product', Product::class);
 Route::apiResource('rewardpoint', DiscountSale::class);
 
 Route::apiResource('role', Role::class);
+
+Route::apiResource('material', Material::class);
 
 Route::apiResource('warrantycertificate', Warranty_Certificate::class);
 
