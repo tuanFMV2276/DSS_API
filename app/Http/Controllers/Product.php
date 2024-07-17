@@ -13,15 +13,27 @@ class Product extends Controller
      *
      * @return \Illuminate\Http\Response
      */
+    // public function index()
+    // {
+    //     //return EntitiesProduct::all();
+    //     $products = EntitiesProduct::join('Main_Diamond', function ($join) {
+    //         $join->on('Main_Diamond.id', '=', 'Product.id') ;
+    //     })->select('Main_Diamond.*', 'Product.*')
+    //     ->get();
+    //     return response()->json($products);
+    // }
+
     public function index()
     {
-        //return EntitiesProduct::all();
-        $products = EntitiesProduct::join('Main_Diamond', function ($join) {
-            $join->on('Main_Diamond.id', '=', 'Product.id') ;
-        })->select('Main_Diamond.*', 'Product.*')
-        ->get();
+        $products = EntitiesProduct::join('Main_Diamond', 'Main_Diamond.id', '=', 'Product.main_diamond_id')
+            ->join('Diamond_Shell', 'Diamond_Shell.id', '=', 'Product.diamond_shell_id')
+            ->join('Material', 'Diamond_Shell.material_id', '=', 'Material.id')
+            ->select('Main_Diamond.*', 'Product.*', 'Diamond_Shell.*', 'Material.*')
+            ->get();
+
         return response()->json($products);
     }
+
 
     /**
      * Store a newly created resource in storage.
