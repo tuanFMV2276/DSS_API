@@ -28,7 +28,7 @@ class Product extends Controller
         $products = EntitiesProduct::join('Main_Diamond', 'Main_Diamond.id', '=', 'Product.main_diamond_id')
             ->join('Diamond_Shell', 'Diamond_Shell.id', '=', 'Product.diamond_shell_id')
             ->join('Material', 'Diamond_Shell.material_id', '=', 'Material.id')
-            ->select('Main_Diamond.*', 'Product.*', 'Diamond_Shell.*', 'Material.*')
+            ->select('Main_Diamond.*', 'Product.*', 'Diamond_Shell.id as diamond_shell_id', 'Material.material_name')
             ->get();
 
         return response()->json($products);
@@ -63,7 +63,7 @@ class Product extends Controller
             ->join('Diamond_Shell', 'Diamond_Shell.id', '=', 'Product.diamond_shell_id')
             ->join('Material', 'Diamond_Shell.material_id', '=', 'Material.id')
             ->where('Product.id', $id)
-            ->select('Main_Diamond.*', 'Product.*', 'Diamond_Shell.*', 'Material.*')
+            ->select('Main_Diamond.*', 'Product.*', 'Diamond_Shell.id as diamond_shell_id', 'Material.material_name')
             ->first();
 
         if ($product) {
