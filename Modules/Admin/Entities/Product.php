@@ -19,26 +19,67 @@ class Product extends Model
      * @var array
      */
 
-    protected $fillable = ['product_code', 'product_name', 'image', 'main_diamond_id',
-     'extra_diamond_id', 'number_ex_diamond', 'quantity','number','diamond_shell_id','size', 
-     'price_rate', 'status'];
+    protected $fillable = [
+        'product_code', 'product_name', 'image', 'main_diamond_id',
+        'extra_diamond_id', 'number_ex_diamond', 'quantity', 'number', 'diamond_shell_id', 'size',
+        'price_rate', 'status'
+    ];
 
-     protected $appends = ['total_price'];
+    protected $appends = ['total_price'];
 
-     public function getTotalPriceAttribute()
-     {
-         $diamondShell = Diamond_Shell::find($this->diamond_shell_id);
-         $mainDiamond = Main_Diamond::find($this->main_diamond_id);
-         $extraDiamond = Ex_Diamond::find($this->extra_diamond_id);
- 
-         $diamondShellPrice = $diamondShell ? $diamondShell->price : 0;
-         $mainDiamondPrice = $mainDiamond ? $mainDiamond->price : 0;
-         $extraDiamondPrice = $extraDiamond ? $extraDiamond->price * $this->number_ex_diamond : 0;
- 
-         $totalPrice = ($diamondShellPrice + $mainDiamondPrice + $extraDiamondPrice) * $this->price_rate;
- 
-         return $totalPrice;
-     }
+    // public function getTotalPriceAttribute()
+    // {
+    //     $diamondShell = Diamond_Shell::find($this->diamond_shell_id);
+    //     //$mainDiamond = Main_Diamond::find($this->main_diamond_id);
+    //      $mainDiamond = Main_Diamond::find($this->main_diamond_id)::join('DiamondPriceList', function ($join) {
+    //         $join->on('Main_Diamond.origin', '=', 'DiamondPriceList.origin') 
+    //               ->on('Main_Diamond.clarity', '=', 'DiamondPriceList.clarity')
+    //               ->on('Main_Diamond.cut', '=', 'DiamondPriceList.cut')
+    //               ->on('Main_Diamond.cara_weight', '=', 'DiamondPriceList.cara_weight')
+    //               ->on('Main_Diamond.color', '=', 'DiamondPriceList.color')->select('Main_Diamond.*', 'DiamondPriceList.price as price');;
+    //     });
+    //     $extraDiamond = Ex_Diamond::find($this->extra_diamond_id);
+
+    //     $diamondShellPrice = $diamondShell ? $diamondShell->price : 0;
+    //     $mainDiamondPrice = $mainDiamond ? $mainDiamond->price : 0;
+    //     $extraDiamondPrice = $extraDiamond ? $extraDiamond->price * $this->number_ex_diamond : 0;
+
+    //     $totalPrice = ($diamondShellPrice + $mainDiamondPrice + $extraDiamondPrice) * $this->price_rate;
+
+    //     return $totalPrice;
+    // }
+
+    public function getTotalPriceAttribute()
+{
+    // Lấy giá trị của Diamond_Shell
+    $diamondShell = Diamond_Shell::find($this->diamond_shell_id);
+
+    // Thực hiện join giữa Main_Diamond và DiamondPriceList
+    $mainDiamond = Main_Diamond::join('DiamondPriceList', function ($join) {
+            $join->on('Main_Diamond.origin', '=', 'DiamondPriceList.origin')
+                 ->on('Main_Diamond.clarity', '=', 'DiamondPriceList.clarity')
+                 ->on('Main_Diamond.cut', '=', 'DiamondPriceList.cut')
+                 ->on('Main_Diamond.cara_weight', '=', 'DiamondPriceList.cara_weight')
+                 ->on('Main_Diamond.color', '=', 'DiamondPriceList.color');
+        })
+        ->where('Main_Diamond.id', $this->main_diamond_id)
+        ->select('Main_Diamond.*', 'DiamondPriceList.price as price')
+        ->first();
+
+    // Lấy giá trị của Ex_Diamond
+    $extraDiamond = Ex_Diamond::find($this->extra_diamond_id);
+
+    // Tính giá trị của các thành phần
+    $diamondShellPrice = $diamondShell ? $diamondShell->price : 0;
+    $mainDiamondPrice = $mainDiamond ? $mainDiamond->price : 0;
+    $extraDiamondPrice = $extraDiamond ? $extraDiamond->price * $this->number_ex_diamond : 0;
+
+    // Tính tổng giá trị
+    $totalPrice = ($diamondShellPrice + $mainDiamondPrice + $extraDiamondPrice) * $this->price_rate;
+
+    return $totalPrice;
+}
+
 
     /**
      * The attributes that should be hidden for arrays.
@@ -71,8 +112,12 @@ class Product extends Model
     {
         $this->hasOne(Order_Detail::class, "product_id");
     }
+<<<<<<< HEAD
 
 
     
 
 }
+=======
+}
+>>>>>>> 36182170ac88e3e66d1c395567312cc2e1403b6b
