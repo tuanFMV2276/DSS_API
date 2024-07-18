@@ -13,15 +13,27 @@ class Product extends Controller
      *
      * @return \Illuminate\Http\Response
      */
+    // public function index()
+    // {
+    //     //return EntitiesProduct::all();
+    //     $products = EntitiesProduct::join('Main_Diamond', function ($join) {
+    //         $join->on('Main_Diamond.id', '=', 'Product.id') ;
+    //     })->select('Main_Diamond.*', 'Product.*')
+    //     ->get();
+    //     return response()->json($products);
+    // }
+
     public function index()
     {
-        //return EntitiesProduct::all();
-        $products = EntitiesProduct::join('Main_Diamond', function ($join) {
-            $join->on('Main_Diamond.id', '=', 'Product.id') ;
-        })->select('Main_Diamond.*', 'Product.*')
-        ->get();
+        $products = EntitiesProduct::join('Main_Diamond', 'Main_Diamond.id', '=', 'Product.main_diamond_id')
+            ->join('Diamond_Shell', 'Diamond_Shell.id', '=', 'Product.diamond_shell_id')
+            ->join('Material', 'Diamond_Shell.material_id', '=', 'Material.id')
+            ->select('Main_Diamond.*', 'Product.*', 'Diamond_Shell.id as diamond_shell_id', 'Material.material_name')
+            ->get();
+
         return response()->json($products);
     }
+
 
     /**
      * Store a newly created resource in storage.
@@ -41,10 +53,26 @@ class Product extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
+    // public function show($id)
+    // {
+    //     return EntitiesProduct::findOrFail($id);
+    // }
     public function show($id)
     {
-        return EntitiesProduct::findOrFail($id);
+        $product = EntitiesProduct::join('Main_Diamond', 'Main_Diamond.id', '=', 'Product.main_diamond_id')
+            ->join('Diamond_Shell', 'Diamond_Shell.id', '=', 'Product.diamond_shell_id')
+            ->join('Material', 'Diamond_Shell.material_id', '=', 'Material.id')
+            ->where('Product.id', $id)
+            ->select('Main_Diamond.*', 'Product.*', 'Diamond_Shell.id as diamond_shell_id', 'Material.material_name')
+            ->first();
+
+        if ($product) {
+            return response()->json($product);
+        } else {
+            return response()->json(['error' => 'Product not found.'], 404);
+        }
     }
+
 
     public function getProductByCode($product_code)
     {
