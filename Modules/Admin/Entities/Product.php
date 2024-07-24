@@ -112,12 +112,5 @@ class Product extends Model
     {
         $this->hasOne(Order_Detail::class, "product_id");
     }
-<<<<<<< HEAD
-
-
-    
 
 }
-=======
-}
->>>>>>> 36182170ac88e3e66d1c395567312cc2e1403b6b
