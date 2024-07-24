@@ -3,7 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use Modules\Admin\Entities\Order_Detail as EntitiesOrder_Detail;
+use Modules\Admin\Entities\Material as Entities_Material;
 
 class Order_Detail extends Controller
 {
@@ -14,7 +14,7 @@ class Order_Detail extends Controller
      */
     public function index()
     {
-        return EntitiesOrder_Detail::all();
+        return Entities_Material::all();
     }
 
     /**
@@ -25,7 +25,7 @@ class Order_Detail extends Controller
      */
     public function store(Request $request)
     {
-        $orderDetail = EntitiesOrder_Detail::create($request->all());
+        $orderDetail = Entities_Material::create($request->all());
         return response()->json($orderDetail, 201);
     }
 
@@ -37,7 +37,7 @@ class Order_Detail extends Controller
      */
     public function show($id)
     {
-        return EntitiesOrder_Detail::findOrFail($id);
+        return Entities_Material::findOrFail($id);
     }
 
     /**
@@ -49,7 +49,7 @@ class Order_Detail extends Controller
      */
     public function update(Request $request, $id)
     {
-        $orderDetail = EntitiesOrder_Detail::findOrFail($id);
+        $orderDetail = Entities_Material::findOrFail($id);
         $orderDetail->update($request->all());
         return response()->json($orderDetail, 200);
     }
@@ -62,19 +62,7 @@ class Order_Detail extends Controller
      */
     public function destroy($id)
     {
-        EntitiesOrder_Detail::destroy($id);
+        Entities_Material::destroy($id);
         return response()->json(null, 204);
     }
-
-    public function dataForBoard(){
-        $for_sale_data = EntitiesOrder_Detail::join('Order',function($join){
-            $join->on('Order_Detail.order_id' ,'=', 'Order.id');
-        })->get();
-        $for_sale_total = $for_sale_data->count();
-        return response()->json($for_sale_total, 200);
-    }
-
 }
-
-
-

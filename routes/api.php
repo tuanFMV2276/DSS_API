@@ -15,6 +15,7 @@ use App\Http\Controllers\Product;
 use App\Http\Controllers\Reward_Point;
 use App\Http\Controllers\Role;
 use App\Http\Controllers\Warranty_Certificate;
+use App\Http\Controllers\Material;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
@@ -58,6 +59,8 @@ Route::apiResource('rewardpoint', DiscountSale::class);
 Route::apiResource('role', Role::class);
 
 Route::apiResource('warrantycertificate', Warranty_Certificate::class);
+
+Route::apiResource('material', Material::class);
 
 //==========================Auth==============================================
 

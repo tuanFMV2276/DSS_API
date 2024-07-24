@@ -13,11 +13,16 @@ class Diamond_Shell extends Model
     protected $primaryKey   = 'id';
     public $timestamps = false;
 
-    protected $fillable = ['weight', 'price', 'status'];
+    protected $fillable = ['name','image', 'price', 'status','weight','material_id'];
     
     public function Product()
     {
         return $this->hasMany(Product::class, "diamond_shell_id");
+    }
+
+    public function Material()
+    {
+        return $this->belongsTo(Material::class, "material_id");
     }
 
 }

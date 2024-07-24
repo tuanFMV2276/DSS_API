@@ -3,9 +3,9 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use Modules\Admin\Entities\Order_Detail as EntitiesOrder_Detail;
+use App\Http\Models\User as EntitiesUser;
 
-class Order_Detail extends Controller
+class BaseController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -14,7 +14,7 @@ class Order_Detail extends Controller
      */
     public function index()
     {
-        return EntitiesOrder_Detail::all();
+        //
     }
 
     /**
@@ -25,8 +25,7 @@ class Order_Detail extends Controller
      */
     public function store(Request $request)
     {
-        $orderDetail = EntitiesOrder_Detail::create($request->all());
-        return response()->json($orderDetail, 201);
+        //
     }
 
     /**
@@ -37,7 +36,7 @@ class Order_Detail extends Controller
      */
     public function show($id)
     {
-        return EntitiesOrder_Detail::findOrFail($id);
+        //
     }
 
     /**
@@ -49,9 +48,7 @@ class Order_Detail extends Controller
      */
     public function update(Request $request, $id)
     {
-        $orderDetail = EntitiesOrder_Detail::findOrFail($id);
-        $orderDetail->update($request->all());
-        return response()->json($orderDetail, 200);
+        //
     }
 
     /**
@@ -62,19 +59,14 @@ class Order_Detail extends Controller
      */
     public function destroy($id)
     {
-        EntitiesOrder_Detail::destroy($id);
-        return response()->json(null, 204);
+        //
     }
 
     public function dataForBoard(){
-        $for_sale_data = EntitiesOrder_Detail::join('Order',function($join){
-            $join->on('Order_Detail.order_id' ,'=', 'Order.id');
-        })->get();
-        $for_sale_total = $for_sale_data->count();
-        return response()->json($for_sale_total, 200);
+        $total_user = EntitiesUser::selectRaw('COUNT(ALL id) as total_user')
+                                    ->where('role','=','user')
+                                        ->get();
+        return response()->json($total_user,200);
     }
 
 }
-
-
-

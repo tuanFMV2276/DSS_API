@@ -4,7 +4,6 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use Modules\Admin\Entities\Product as EntitiesProduct;
-use Illuminate\Database\Eloquent\Model;
 
 class Product extends Controller
 {
@@ -17,9 +16,9 @@ class Product extends Controller
     {
         //return EntitiesProduct::all();
         $products = EntitiesProduct::join('Main_Diamond', function ($join) {
-            $join->on('Main_Diamond.id', '=', 'Product.id') ;
+            $join->on('Main_Diamond.id', '=', 'Product.id');
         })->select('Main_Diamond.*', 'Product.*')
-        ->get();
+            ->get();
         return response()->json($products);
     }
 
@@ -58,7 +57,7 @@ class Product extends Controller
             ]);
         } else {
             return response()->json([
-                'error' => 'Product not found.'
+                'error' => 'Product not found.',
             ], 404);
         }
     }
@@ -87,5 +86,18 @@ class Product extends Controller
     {
         EntitiesProduct::destroy($id);
         return response()->json(null, 204);
+    }
+
+    public function dataForBoard()
+    {
+        $for_sale_date = EntitiesProduct::selectRaw('COUNT(ALL id) as total_product')
+                                        ->where('status','=','1')
+                                        ->get();
+        $available_product = EntitiesProduct::selectRaw('COUNT(ALL id) as total_product')
+                                            ->get();
+        return response()->json(
+            ['available_product' => $available_product,
+            'for_sale_product' => $for_sale_date,]
+        );
     }
 }
