@@ -14,12 +14,16 @@ class Order extends Controller
      *
      * @return \Illuminate\Http\Response
      */
+    // public function index()
+    // {
+    //     $orders = EntitiesOrder::join('Order_Detail', function ($join) {
+    //         $join->on('Order_Detail.id', '=', 'Order.id');
+    //     })->select('Order_Detail.*', 'Order.*');
+    //     return response()->json($orders);
+    // }
     public function index()
     {
-        $orders = EntitiesOrder::join('Order_Detail', function ($join) {
-            $join->on('Order_Detail.id', '=', 'Order.id');
-        })->select('Order_Detail.*', 'Order.*');
-        return response()->json($orders);
+        return EntitiesOrder::all();
     }
 
     /**

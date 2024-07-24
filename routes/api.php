@@ -8,14 +8,15 @@ use App\Http\Controllers\DiscountSale;
 use App\Http\Controllers\Employee;
 use App\Http\Controllers\Ex_Diamond;
 use App\Http\Controllers\Main_Diamond;
+use App\Http\Controllers\Material;
 use App\Http\Controllers\Order;
 use App\Http\Controllers\Order_Detail;
 use App\Http\Controllers\Payment;
 use App\Http\Controllers\Product;
 use App\Http\Controllers\Reward_Point;
 use App\Http\Controllers\Role;
+use App\Http\Controllers\UserController;
 use App\Http\Controllers\Warranty_Certificate;
-use App\Http\Controllers\Material;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
@@ -34,7 +35,10 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
     return $request->user();
 });
 
+
 Route::apiResource('diamondpricelist', Diamond_Price_List::class);
+
+Route::apiResource('user', UserController::class);
 
 Route::apiResource('customer', Customer::class);
 
@@ -57,6 +61,8 @@ Route::apiResource('product', Product::class);
 Route::apiResource('rewardpoint', DiscountSale::class);
 
 Route::apiResource('role', Role::class);
+
+Route::apiResource('material', Material::class);
 
 Route::apiResource('warrantycertificate', Warranty_Certificate::class);
 

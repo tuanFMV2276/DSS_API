@@ -2,19 +2,19 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\User;
 use Illuminate\Http\Request;
-use Modules\Admin\Entities\Material as EntitiesMaterial;
 
-class Material extends Controller
+class UserController extends Controller
 {
-    /**
+        /**
      * Display a listing of the resource.
      *
      * @return \Illuminate\Http\Response
      */
     public function index()
     {
-        return EntitiesMaterial::all();
+        return User::all();
     }
 
     /**
@@ -25,8 +25,8 @@ class Material extends Controller
      */
     public function store(Request $request)
     {
-        $material = EntitiesMaterial::create($request->all());
-        return response()->json($material, 201);
+        $user = User::create($request->all());
+        return response()->json($user, 201);
     }
 
     /**
@@ -37,7 +37,7 @@ class Material extends Controller
      */
     public function show($id)
     {
-        return EntitiesMaterial::findOrFail($id);
+        return User::findOrFail($id);
     }
 
     /**
@@ -49,9 +49,9 @@ class Material extends Controller
      */
     public function update(Request $request, $id)
     {
-        $material = EntitiesMaterial::findOrFail($id);
-        $material->update($request->all());
-        return response()->json($material, 200);
+        $user = User::findOrFail($id);
+        $user->update($request->all());
+        return response()->json($user, 200);
     }
 
     /**
@@ -62,7 +62,7 @@ class Material extends Controller
      */
     public function destroy($id)
     {
-        EntitiesMaterial::destroy($id);
+        User::destroy($id);
         return response()->json(null, 204);
     }
 }

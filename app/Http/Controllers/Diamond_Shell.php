@@ -14,7 +14,12 @@ class Diamond_Shell extends Controller
      */
     public function index()
     {
-        return EntitiesDiamond_Shell::all();
+        // return EntitiesDiamond_Shell::all();
+        $shell = EntitiesDiamond_Shell::join('Material', function ($join) {
+            $join->on('Material.id', '=', 'Diamond_Shell.material_id');
+        })->select('Diamond_Shell.*', 'Material.*')
+        ->get();
+        return response()->json($shell);
     }
 
     /**
