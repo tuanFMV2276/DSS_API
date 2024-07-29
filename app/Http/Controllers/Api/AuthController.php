@@ -17,8 +17,8 @@ class AuthController extends Controller
             'name' => 'required|string|max:255',
             'email' => 'required|string|email|max:255|unique:users',
             'password' => 'required|string|min:8',
-            'date_of_birth' => 'required|date',
-            'phone' => 'required|string|min:8|max:15',
+            'date_of_birth' => 'required|date|before:today',
+            'phone' => 'required|digits:10|numeric',
             'address' => 'required|string|max:255',
         ]);
 
@@ -31,8 +31,10 @@ class AuthController extends Controller
             'email' => $request->email,
             'password' => Hash::make($request->password),
             'date_of_birth' => $request->date_of_birth,
+            'gender' => $request->gender,
             'phone' => $request->phone,
             'address' => $request->address,
+            'status' => '1',
         ]);
 
         $token = $user->createToken('auth_token')->plainTextToken;

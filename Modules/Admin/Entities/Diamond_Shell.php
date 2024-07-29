@@ -13,7 +13,7 @@ class Diamond_Shell extends Model
     protected $primaryKey   = 'id';
     public $timestamps = false;
 
-    protected $fillable = ['name','weight', 'material_id', 'status'];
+    protected $fillable = ['name','image','weight', 'material_id', 'status'];
 
     protected $appends = ['price'];
 

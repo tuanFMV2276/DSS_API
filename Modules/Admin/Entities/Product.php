@@ -112,4 +112,5 @@ class Product extends Model
     {
         $this->hasOne(Order_Detail::class, "product_id");
     }
+
 }

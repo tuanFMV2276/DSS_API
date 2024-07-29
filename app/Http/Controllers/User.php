@@ -3,18 +3,18 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use App\Http\Models\User as EntitiesUser;
+use App\Models\User as EntitiesUser;
 
-class BaseController extends Controller
+class User extends Controller
 {
-    /**
+        /**
      * Display a listing of the resource.
      *
      * @return \Illuminate\Http\Response
      */
     public function index()
     {
-        //
+        return EntitiesUser::all();
     }
 
     /**
@@ -25,7 +25,8 @@ class BaseController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $user = EntitiesUser::create($request->all());
+        return response()->json($user, 201);
     }
 
     /**
@@ -36,7 +37,7 @@ class BaseController extends Controller
      */
     public function show($id)
     {
-        //
+        return EntitiesUser::findOrFail($id);
     }
 
     /**
@@ -48,7 +49,9 @@ class BaseController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        $user = EntitiesUser::findOrFail($id);
+        $user->update($request->all());
+        return response()->json($user, 200);
     }
 
     /**
@@ -59,7 +62,8 @@ class BaseController extends Controller
      */
     public function destroy($id)
     {
-        //
+        EntitiesUser::destroy($id);
+        return response()->json(null, 204);
     }
 
     public function dataForBoard(){

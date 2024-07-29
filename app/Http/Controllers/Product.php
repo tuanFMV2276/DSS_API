@@ -128,5 +128,35 @@ class Product extends Controller
             'for_sale_product' => $for_sale_date,]
         );
     }
+
+    public function dataChart2Proceed(){
+        $merge_data = EntitiesProduct::join('Order_Detail','Order_Detail.product_id' ,'=', 'Product.id' )
+                                        ->select('Product.product_name')
+                                        ->get();
+
+        $total_maleShell = 0;
+        $total_femaleShell = 0;
+
+        foreach ($merge_data as $key => $value) {
+            $pattern = '/\b(Nữ|Nam)\b/';
+            preg_match($pattern, $value['name'], $matches);
+            $result = !empty($matches) ? $matches[0] : "";
+
+            if ($result === "Nam") {
+                $total_maleShell++;
+            } else if ($result === "Nữ") {
+                $total_femaleShell++;
+            }
+        }
+
+        $total = $total_maleShell + $total_femaleShell;
+        $percent_shell_male = ($total_maleShell - $total) * 100;
+        $percent_shell_female = 100 - $percent_shell_male;
+
+        return response()->json(
+            ['percent_male' => $percent_shell_male,
+            'percent_female' => $percent_shell_female]
+        );
+    }
 }
 

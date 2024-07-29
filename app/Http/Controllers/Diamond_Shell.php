@@ -17,7 +17,7 @@ class Diamond_Shell extends Controller
         // return EntitiesDiamond_Shell::all();
         $shell = EntitiesDiamond_Shell::join('Material', function ($join) {
             $join->on('Material.id', '=', 'Diamond_Shell.material_id');
-        })->select('Diamond_Shell.*', 'Material.*')
+        })->select('Diamond_Shell.*', 'Material.material_name')
         ->get();
         return response()->json($shell);
     }
@@ -71,4 +71,3 @@ class Diamond_Shell extends Controller
         return response()->json(null, 204);
     }
 }
-

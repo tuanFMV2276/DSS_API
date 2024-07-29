@@ -17,6 +17,7 @@ use App\Http\Controllers\Reward_Point;
 use App\Http\Controllers\Role;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\Warranty_Certificate;
+use App\Http\Controllers\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
@@ -38,7 +39,7 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
 
 Route::apiResource('diamondpricelist', Diamond_Price_List::class);
 
-Route::apiResource('user', UserController::class);
+Route::apiResource('user', User::class);
 
 Route::apiResource('customer', Customer::class);
 
