@@ -122,6 +122,7 @@ class Product extends Controller
                                         ->where('status','=','1')
                                         ->get();
         $available_product = EntitiesProduct::selectRaw('COUNT(ALL id) as total_product')
+                                            ->where('quantity','=','1')
                                             ->get();
         return response()->json(
             ['available_product' => $available_product,
